@@ -119,4 +119,4 @@ def user_info(request):
 
 # git op
 def book():
-    print("helloatul")
+    print("helloatulq")
