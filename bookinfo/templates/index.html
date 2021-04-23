@@ -1,0 +1,86 @@
+{% load static %}
+<hr><a href="/homepage/">Home</a></hr>
+
+<link rel="stylesheet" type="text/css" href="{% static 'bookinfo/style.css' %}">
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+    {% endfor %}
+</ul>
+{% endif %}
+<form action="/save_book_info/" method="POST">
+  {% csrf_token %}
+    <div class="container">
+      <h1>Book Info</h1>
+      <p>Please fill the book info.</p>
+      <hr>
+      <input type="hidden" name="bid" value="{{book.id}}" >
+      
+      <label for="name"><b>Book Name</b></label>
+      <input type="text" name="name" value="{{book.name}}" >
+  
+      <label for="author"><b>Author</b></label>
+      <input type="text"  name="author" value="{{book.author}}"  >
+        
+      <label for="Prize"><b>Prize</b></label>
+      <input type="number"  name="prize"  value="{{book.prize}}" >
+  
+      <label for="Publication"><b>Publication</b></label>
+      <input type="text"  name="publication" value="{{book.publication}}"  >
+  
+      <button type="submit" class="submitbtn">Register</button>
+    </div>
+  
+    
+      
+    </div>
+  </form>
+
+  <hr>Book Information</hr>
+  <hr><a href="/show_deleted_book/">show deleted Book</a></hr>
+
+  <table >  
+    <thead>  
+    <tr>  
+        <th>SR.NO</th>
+        <th>Book ID</th> 
+        <th>Book Name  </th>  
+        <th>Author</th>  
+        <th>Prize</th>  
+        <th>Publication</th> 
+        {% if  deleted %}
+        <th>Actions</th>  
+        {% elif not deleted %} 
+        <th>Actions</th>  
+        {% endif %} 
+    </tr>  
+    </thead>  
+    <tbody>  
+      
+{% for Book_info in books %} 
+ 
+    <tr>  
+        <td>{{ forloop.counter }}</td>
+        <td>{{Book_info.id }}</td>  
+        <td>{{ Book_info.name }}</td>  
+        <td>{{ Book_info.author }}</td>  
+        <td>{{ Book_info.prize}}</td> 
+        <td>{{ Book_info.publication}}</td> 
+
+        {% if  deleted %}
+        <td><a href="/restore/{{ Book_info.id }}">Restore</a>  </td>
+
+        {% elif not deleted %}
+
+
+        <td>  
+            <a href="/edit_book/{{ Book_info.id }}">Edit |</a>  
+            <a href="/delete_data/{{ Book_info.id }}">Delete</a>  
+        </td>  
+        {% endif %}  
+
+    </tr>  
+{% endfor %}  
+    </tbody>  
+</table>  

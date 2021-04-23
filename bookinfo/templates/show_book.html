@@ -1,0 +1,41 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Employee Records</title>  
+     {% load staticfiles %}  
+    <link rel="stylesheet" href="{% static 'bookinfo/show_style.css' %}"/>  
+</head>  
+<body>  
+<table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+    <tr>  
+        <th>Book Name  </th>  
+        <th>Author</th>  
+        <th>Prize</th>  
+        <th>Publication</th>  
+        <th>Actions</th>  
+    </tr>  
+    </thead>  
+    <tbody>  
+{% for Book_info in book %}  
+    <tr>  
+        <td>{{Book_info.id }}</td>  
+        <td>{{ Book_info.name }}</td>  
+        <td>{{ Book_info.author }}</td>  
+        <td>{{ Book_info.prize}}</td> 
+        <td>{{ Book_info.publication}}</td>  
+
+        <td>  
+            <a href="/edit/{{ Book_info.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>  
+            <a href="/delete/{{ Book_info.id }}">Delete</a>  
+        </td>  
+    </tr>  
+{% endfor %}  
+    </tbody>  
+</table>  
+<br>  
+<br>  
+<!-- <center><a href="/emp" class="btn btn-primary">Add New Record</a></center>   -->
+</body>  
+</html>  
