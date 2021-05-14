@@ -36,4 +36,9 @@ class Book(models.Model):
     def __str__(self):
         return self.name
 
-    
+    # git code
+    def git():
+        print("1")
+           # git code
+    def git():
+        print("3")
